@@ -37,7 +37,7 @@
     },
     {
       "id": "Proj-6",
-      "status": "in_progress",
+      "status": "done",
       "description": "Write the documentation for the app using Markdown",
       "title": "Documentation",
       "assignedTo": "2"

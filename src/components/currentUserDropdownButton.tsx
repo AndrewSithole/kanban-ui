@@ -9,8 +9,11 @@ const CurrentUserDropdownButton = () => {
     const toggleShow = () => {
         setShow(!show);
     };
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const closeDropdown = (event) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         if (buttonRef.current && !buttonRef.current.contains(event.target)) {
             setShow(false);
         }

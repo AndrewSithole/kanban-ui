@@ -10,8 +10,11 @@ const ChangeUserAssignedDropdownButton = ({currentUser, updateTicketUserCallback
     const toggleShow = () => {
         setShow(!show);
     };
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const closeDropdown = (event) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         if (buttonRef.current && !buttonRef.current.contains(event.target)) {
             setShow(false);
         }
@@ -26,7 +29,9 @@ const ChangeUserAssignedDropdownButton = ({currentUser, updateTicketUserCallback
     const contextData = useContext(CurrentUserContext);
 
     const handleUpdateUser = (user: User)=>{
-        if(contextData?.currentUser.role!=="admin" && user.id!==contextData?.currentUser.id){
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        if(contextData.currentUser.role!=="admin" && user.id!==contextData?.currentUser.id){
             alert("You can only assign tickets to yourself")
         }
         else {

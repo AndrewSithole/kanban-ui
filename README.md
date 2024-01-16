@@ -1,5 +1,7 @@
 # Kanban UI
 ## Pre-requisites
+- Install```json-server``` using```npm i -g json-server``` 
+- run ```json-server --watch db.json```
 - ```.env``` file as shown in the .env_example file
 ## Uses the React + TypeScript + Vite template
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
