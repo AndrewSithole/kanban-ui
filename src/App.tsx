@@ -6,6 +6,7 @@ import React, {useState} from "react";
 
 function App() {
     const [tickets, setTickets] = useState(initTickets);
+    const [currentDropTarget, setCurrentDropTarget] = useState<null | Status>(null)
     const handleUpdateTicket = (newTicket: Ticket)=> {
         const updatedTickets = tickets.map(ticket=>{
             if(ticket.id === newTicket.id){
@@ -16,7 +17,6 @@ function App() {
         setTickets(updatedTickets);
     }
     const handleDrop = (event: React.DragEvent<HTMLDivElement>, status: Status)=> {
-        console.log(event.dataTransfer.getData("id"))
         const updatedTickets = tickets.map(ticket=>{
             if(ticket.id === event.dataTransfer.getData('id')){
                return {...ticket, status: status}
@@ -24,17 +24,22 @@ function App() {
             return ticket;
         });
         setTickets(updatedTickets);
+        setCurrentDropTarget(null)
+    }
+    const handleDragEnter = (status: Status)=> {
+        setCurrentDropTarget(status)
     }
     return (
         <div className="divide-x grid grid-cols-3 ">
             {Statuses.map(status=>
                 <div
+                    onDragEnter={()=>handleDragEnter(status)}
                     onDragOver={(e)=>e.preventDefault()}
                 onDrop={(e)=>handleDrop(e, status)} key={status}>
                 <h2 className={"capitalize text-2xl p-2 text-neutral-800"}>
                     {status.replace("_", " ")}
                 </h2>
-                <div>
+                <div className={`h-full ${currentDropTarget===status && 'bg-gray-100'}`}>
                     { tickets.map(ticket=> ticket.status===status && <TicketCard
                         key={ticket.id}
                         ticket={ticket}
