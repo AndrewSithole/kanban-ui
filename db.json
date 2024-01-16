@@ -16,45 +16,38 @@
     },
     {
       "id": "Proj-3",
-      "status": "todo",
+      "status": "in_progress",
       "description": "Write unit tests for the backend API using Jest",
       "title": "Unit tests",
       "assignedTo": "0"
     },
     {
       "id": "Proj-4",
-      "status": "done",
+      "status": "todo",
       "description": "Create a database schema for the user and project models",
       "title": "Database schema",
       "assignedTo": "1"
     },
     {
       "id": "Proj-5",
-      "status": "todo",
+      "status": "in_progress",
       "description": "Deploy the app to Heroku and set up the environment variables",
       "title": "Deployment",
       "assignedTo": "1"
     },
     {
       "id": "Proj-6",
-      "status": "done",
+      "status": "in_progress",
       "description": "Write the documentation for the app using Markdown",
       "title": "Documentation",
       "assignedTo": "2"
     },
     {
-      "id": "Proj-6",
-      "title": "New Todo ticket",
-      "description": "des",
-      "status": "todo",
-      "assignedTo": "1"
-    },
-    {
       "id": "Proj-7",
-      "title": "New inprogress ticket",
-      "description": "By his exce",
-      "status": "in_progress",
-      "assignedTo": "1"
+      "title": "Hallo world wonder",
+      "description": "Its a great day",
+      "status": "done",
+      "assignedTo": "0"
     }
   ]
 }

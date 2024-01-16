@@ -1,5 +1,5 @@
 import './App.css'
-import KanbanPage from "./pages/KanbanPage.tsx";
+import KanbanPage from "./Presentation/pages/KanbanPage.tsx";
 import {User} from "./models/user.ts";
 import Header from "./components/header.tsx";
 import {useState} from "react";

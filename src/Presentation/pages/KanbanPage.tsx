@@ -1,49 +1,52 @@
-import TicketCard from "../components/ticketCard.tsx";
-import {Status, Statuses, Ticket, TicketModel} from "../models/ticket.ts";
+import TicketCard from "../../components/ticketCard.tsx";
+import {Status, Statuses, Ticket} from "../../models/ticket.ts";
 import {useContext, useEffect, useState} from "react";
-import {users} from "../data/users.ts";
-import CreateTicketModal, {CreateTicketFormProps} from "../components/CreateTicketModal.tsx";
-import {CurrentUserContext} from "../data/user_context.tsx";
+import CreateTicketModal, {CreateTicketFormProps} from "../../components/CreateTicketModal.tsx";
+import {CurrentUserContext} from "../../data/user_context.tsx";
+import {GetTicketsUseCase} from "../../Domain/Usecases/getTicketsUseCase.ts";
+import {UpdateTicketUseCase, UpdateTicketUseCaseParams} from "../../Domain/Usecases/updateTicketUseCase.ts";
+import {CreateTicketUseCase, CreateTicketUseCaseParams} from "../../Domain/Usecases/createTicketUseCase.ts";
 
 function App() {
     const [tickets, setTickets] = useState<Array<Ticket>>([]);
     const [currentDropTarget, setCurrentDropTarget] = useState<null | Status>(null)
     const handleUpdateTicket = (newTicket: Ticket)=> {
+        const updateTicketUseCase = new UpdateTicketUseCase();
+        const updateParams = new UpdateTicketUseCaseParams({...newTicket});
+        updateTicketUseCase.call(updateParams).then((res: boolean)=>{
+                if(res){
+                    handleUpdateTicketUI(updateParams.ticket);
+                }
+            }
+        );
+    }
+    const handleUpdateTicketUI = (newTicket: Ticket)=> {
         const updatedTickets = tickets.map(ticket=>{
             if(ticket.id === newTicket.id){
-                fetch(import.meta.env.VITE_API_BASE_URL+"/tickets/"+ticket.id, {
-                    method: "PUT",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({...newTicket, assignedTo: newTicket.assignedTo.id})
-                }).then(res=> res.json().then(data=>console.log(data)))
-               return newTicket
+                return newTicket
             }
             return ticket;
         });
         setTickets(updatedTickets);
     }
     useEffect(()=>{
-        fetch(import.meta.env.VITE_API_BASE_URL+"/tickets").then(
-            (response)=>{
-                try {
-                    response.json().then(data=> {
-                        setTickets(data.map((ticket: TicketModel)=> {
-                            return {...ticket, assignedTo:users.find(user => user.id===ticket.assignedTo)}
-                        }))
-                    })
-                }catch (e){
-                    console.log(e)
-                }
-            }
-        )
+        const getTicketsUseCase= new GetTicketsUseCase()
+        getTicketsUseCase.call({}).then((result: Array<Ticket>)=>{
+            setTickets(result)
+        })
     }, [])
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>, status: Status)=> {
-        const ticket_ = tickets.find(ticket=> ticket.id === event.dataTransfer.getData("id"))
-        handleUpdateTicket({...ticket_!, status: status})
         setCurrentDropTarget(null)
+        const ticket_ = tickets.find(ticket=> ticket.id === event.dataTransfer.getData("id"))
+        const updateTicketUseCase = new UpdateTicketUseCase();
+        const updateParams = new UpdateTicketUseCaseParams({...ticket_!, status: status});
+        updateTicketUseCase.call(updateParams).then((res: boolean)=>{
+                if(res){
+                    handleUpdateTicketUI(updateParams.ticket);
+                }
+            }
+        );
     }
     const handleDragEnter = (status: Status)=> {
         setCurrentDropTarget(status)
@@ -59,15 +62,15 @@ function App() {
     function handleModalSubmit(form: CreateTicketFormProps) {
         // Do something with the form data
         console.log(form);
-        const ticket: Ticket = {...form, id: "Proj-"+tickets.length.toString()}
-        fetch(import.meta.env.VITE_API_BASE_URL+"/tickets", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({...ticket, assignedTo: ticket.assignedTo.id})
-        }).then(res=> res.json().then(data=>console.log(data)))
-        setTickets([...tickets, ticket]);
+        const ticket: Ticket = {...form, id: "Proj-"+(tickets.length+1)}
+        const createTicketUseCase = new CreateTicketUseCase();
+        const updateParams = new CreateTicketUseCaseParams({...ticket!});
+        createTicketUseCase.call(updateParams).then((res: boolean)=>{
+                if(res){
+                    setTickets([...tickets, ticket]);
+                }
+            }
+        );
         setIsModalOpen(false);
     }
     const [currentCreationStatus, setCurrentCreationStatus] = useState<Status>("todo")
