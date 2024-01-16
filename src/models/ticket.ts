@@ -1,3 +1,5 @@
+import {User} from "./user.ts";
+
 export type Status = "todo" | "in_progress" | "done";
 
 export type Ticket = {
