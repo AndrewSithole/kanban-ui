@@ -10,4 +10,12 @@ export type Ticket = {
     assignedTo: User
 }
 
+export type TicketModel = {
+    id: string,
+    title: string,
+    description: string,
+    status: Status,
+    assignedTo: string
+}
+
 export const Statuses: Status[] = ["todo", "in_progress", "done"]

@@ -1,5 +1,7 @@
-# React + TypeScript + Vite
-
+# Kanban UI
+## Pre-requisites
+- ```.env``` file as shown in the .env_example file
+## Uses the React + TypeScript + Vite template
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

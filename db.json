@@ -1,0 +1,60 @@
+{
+  "tickets": [
+    {
+      "id": "Proj-1",
+      "status": "in_progress",
+      "description": "Implement the login feature using Firebase authentication",
+      "title": "Login featuresd",
+      "assignedTo": "1"
+    },
+    {
+      "id": "Proj-2",
+      "status": "done",
+      "description": "Design the landing page using Bootstrap and CSS",
+      "title": "Landing page hahah",
+      "assignedTo": "1"
+    },
+    {
+      "id": "Proj-3",
+      "status": "todo",
+      "description": "Write unit tests for the backend API using Jest",
+      "title": "Unit tests",
+      "assignedTo": "0"
+    },
+    {
+      "id": "Proj-4",
+      "status": "done",
+      "description": "Create a database schema for the user and project models",
+      "title": "Database schema",
+      "assignedTo": "1"
+    },
+    {
+      "id": "Proj-5",
+      "status": "todo",
+      "description": "Deploy the app to Heroku and set up the environment variables",
+      "title": "Deployment",
+      "assignedTo": "1"
+    },
+    {
+      "id": "Proj-6",
+      "status": "in_progress",
+      "description": "Write the documentation for the app using Markdown",
+      "title": "Documentation",
+      "assignedTo": "2"
+    },
+    {
+      "id": "Proj-6",
+      "title": "New Todo ticket",
+      "description": "des",
+      "status": "todo",
+      "assignedTo": "1"
+    },
+    {
+      "id": "Proj-7",
+      "title": "New inprogress ticket",
+      "description": "By his exce",
+      "status": "in_progress",
+      "assignedTo": "1"
+    }
+  ]
+}
